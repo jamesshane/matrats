@@ -2,9 +2,13 @@
 
 #sh -c 'L=$$; echo $L;exec cmatrix -b -s&' #initial test to get pid
 
+isdebug=$1
+
 while true; do
 	#mt=$(free -m | awk 'NR==2{printf "Mem: %s/%sMB (%.2f%%)\n", $2-($4),$2,($2-($4))*100/$2 }') #getting memory
-	mt=$(free -m | awk 'NR==2{printf "%i", ($2-($4))*100/$2 }')
+	#mt=$(free -m | awk 'NR==2{printf "%i", ($2-($3))*100/$2 }')
+	#free -m;free -m | awk 'NR==2{printf "%i | %i | %i", ($2-$7),$2, (($2-$7)/$2)*100 }'
+	mt=$(free -m | awk 'NR==2{printf "%i", (($2-$7)/$2)*100 }')
 	case 1 in
 		$(($mt > 95)))
 			c="red"
@@ -22,7 +26,10 @@ while true; do
 			c="white"
 			;;
 	esac
-	#echo "$mt | $c | $prev" #debug
+	if [[ $isdebug == "-d" ]]
+	then
+		echo "$mt | $c | $prev" #debug
+	fi
 	sleep 5
 	if [[ $prev != $c ]] 
 	then
