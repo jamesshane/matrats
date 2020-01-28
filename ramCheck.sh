@@ -10,7 +10,7 @@ while true; do
 	#free -m;free -m | awk 'NR==2{printf "%i | %i | %i", ($2-$7),$2, (($2-$7)/$2)*100 }'
 	mt=$(free -m | awk 'NR==2{printf "%i", (($2-$7)/$2)*100 }')
 	case 1 in
-		$(($mt > 95)))
+		$(($mt > 90)))
 			c="red"
 			;;
 
