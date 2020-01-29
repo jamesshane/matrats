@@ -48,8 +48,9 @@ trap "tput sgr0; clear; exit" SIGTERM SIGINT
 
 if [[ $1 =~ '-h' ]]; then
 	echo "Display a Matrix(ish) screen in the terminal"
-	echo "Usage:		matrix [SPACING [SCROLL]]"
-	echo "Example:	matrix 100 0"
+	echo "Usage:		matrix [SPACING [SCROLL]] TESTTYPE DEBUG"
+	echo "Example:	matrix 100 0 m"
+	echo "m=memory (defualt), c=cpu"
 	exit 0
 fi
 
@@ -79,7 +80,7 @@ while :
 						;;
 				esac
 			done
-			printf "\n"
+			#printf "\n"
 
 			sleep 5
 			if [[ $testtype == "m" ]]
