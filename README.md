@@ -5,3 +5,7 @@ This program uses cmatrix to check the stats on the system and reports green, ye
 ## ramCheck.sh
 
 Reads the current memory usage.
+
+## cpuCheck.sh
+
+Reads the current CPU usage.
