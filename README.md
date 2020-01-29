@@ -1,11 +1,15 @@
 # matrats
 
-This program uses cmatrix to check the stats on the system and reports green, yellow, red for the available resource.
+This program uses visual matrix-like display to check the stats on the system and reports green, yellow, red for the available resource.
 
-## ramCheck.sh
+## ramCheck_cm.sh
 
-Reads the current memory usage.
+Uses cmatrix program. Reads the current memory usage.
 
-## cpuCheck.sh
+## cpuCheck_cm.sh
 
-Reads the current CPU usage.
+Uses cmatrix program. Reads the current CPU usage.
+
+## matrats.sh
+
+Universal low resource version. -h for help.
