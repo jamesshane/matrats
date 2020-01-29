@@ -29,11 +29,12 @@ colors=($green $brightgreen)
 colors=($red $brightred)
 colors=($yellow $brightyellow)
 colors=($grey $darkgrey)
+debugcolors=($blue $brightblue)
 ### End customization
 
 ### Do not edit below this line
-spacing=${1:-100} # the likelihood of a character being left in place
-scroll=${2:-0} # 0 for static, positive integer determines scroll speed
+spacing=5 #${1:-5} # the likelihood of a character being left in place
+scroll=1 #${2:-1} # 0 for static, positive integer determines scroll speed
 screenlines=$(expr `tput lines` - 1 + $scroll)
 screencols=$(expr `tput cols` / 2 - 1)
 
@@ -48,22 +49,30 @@ trap "tput sgr0; clear; exit" SIGTERM SIGINT
 
 if [[ $1 =~ '-h' ]]; then
 	echo "Display a Matrix(ish) screen in the terminal"
-	echo "Usage:		matrix [SPACING [SCROLL]] TESTTYPE DEBUG"
-	echo "Example:	matrix 100 0 m"
-	echo "m=memory (defualt), c=cpu"
+	echo "Usage:		matrix  [TESTTYPE] [DEBUG]" #[SPACING [SCROLL]]
+	echo "Example:	matrix m" #echo "Example:	matrix 100 0 m"
+	echo "TESTTYPE: m=memory (defualt), c=cpu"
+	echo "DEBUG: 1=show debug info in blue"
 	exit 0
 fi
 
-testtype=$3
+testtype=$1
 if [[ $testtype == "" ]]
 then
 	testtype="m"
 fi
 
-isdebug=$4
+isdebug=$2
 
 clear
 tput cup 0 0
+#print anything in line here
+
+if [[ $isdebug != "" ]]
+then
+	printf "${debugcolors[$RANDOM%$colorcount]}$spacing | $scroll | $testtype "
+fi
+
 while :
 	do for i in $(eval echo {1..$screenlines})
 		do for i in $(eval echo {1..$screencols})
@@ -93,7 +102,7 @@ while :
 			fi
 			if [[ $isdebug != "" ]]
 			then
-				echo "$mt"
+				printf "${debugcolors[$RANDOM%$colorcount]}$testtype=$mt "
 			fi
             case 1 in
                 $(($mt > 90)))
