@@ -82,7 +82,7 @@ while :
 			done
 			#printf "\n"
 
-			sleep 5
+			sleep 1
 			if [[ $testtype == "m" ]]
 			then
             	mt=$(free -m | awk 'NR==2{printf "%i", (($2-$7)/$2)*100 }')
